@@ -1,0 +1,20 @@
+{
+  "name": "doc-appointment",
+  "description": "",
+  "main": "",
+  "authors": [
+    "sujithsingh235 <62689265+sujithsingh235@users.noreply.github.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sujithsingh235/doc-appointment",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#1.8.x"
+  }
+}
