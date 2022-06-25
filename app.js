@@ -3,9 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 const timeSlotsRouter = require("./routes/timeSlots");
+const workShiftsRouter = require("./routes/workShifts");
 
 const connectDB = require("./db/util").connect;
 
@@ -18,8 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 connectDB();
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use("/timeSlots", timeSlotsRouter);
+app.use("/workShifts", workShiftsRouter);
 
 module.exports = app;

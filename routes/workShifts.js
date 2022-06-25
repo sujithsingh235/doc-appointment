@@ -1,10 +1,10 @@
-const timeSlotServices = require("../services/timeSlotServices");
+const workShiftServices = require("../services/workShiftServices");
 
 const router = require('express').Router();
 
 router.get("/", async function (req, res) {
     try {
-        let result = await timeSlotServices.getTimeSlotsByDate(req.query.date);
+        let result = await workShiftServices.getAll(req.query.date);
         res.send(result);
     }
     catch (err) {

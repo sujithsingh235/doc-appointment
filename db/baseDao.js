@@ -7,12 +7,26 @@ function getByQuery(collection, query, projection) {
             let cursor = await db.collection(collection).find(query, projection);
             resolve(cursor.toArray());
         }
-        catch(err) {
+        catch (err) {
+            reject(err);
+        }
+    });
+}
+
+function aggregate(collection, pipeline) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let db = getDB();
+            let cursor = await db.collection(collection).aggregate(pipeline);
+            resolve(cursor.toArray());
+        }
+        catch (err) {
             reject(err);
         }
     });
 }
 
 module.exports = {
-    getByQuery: getByQuery
+    getByQuery: getByQuery,
+    aggregate: aggregate
 }

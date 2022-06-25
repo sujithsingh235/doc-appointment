@@ -1,26 +1,20 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <div class="card p-3 w-100">
+            <div class="card p-3 w-100 mb-3" ng-repeat="shift in workShifts">
                 <div class="d-flex">
                     <div class="flex-grow-1">
-                        <h5 class="card-title">Morning</h5>
-                        <div class="card-subtitle">9.00AM to 12.00PM</div>
+                        <h5 class="card-title">{{ shift.shiftName }}</h5>
+                        <div class="card-subtitle">{{ shift.startTime }} to {{ shift.endTime }}</div>
                     </div>
                     <button class="btn btn-outline-primary me-2">Add slot</button>
                 </div>
                 <hr>
                 <div class="card-body">
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
-                    <button class="btn btn-outline-primary me-2 mb-2">9.00AM - 9.30AM</button>
+                    <button ng-repeat="timeSlot in shiftTimeSlotsMap[shift._id]"
+                        class="btn btn-outline-primary me-2 mb-2">
+                        {{ timeSlot.startTime }} - {{ timeSlot.endTime }}
+                    </button>
                 </div>
             </div>
         </div>

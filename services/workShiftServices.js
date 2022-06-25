@@ -1,10 +1,11 @@
-const dao = require("../db/baseDao");
 const collection = "workShifts";
+const dao = require("../db/baseDao");
 
 function getAll() {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await dao.getByQuery(collection, {}, {}));
+            let result = await dao.getByQuery(collection, {}, {});
+            resolve(result);
         }
         catch(err) {
             reject(err);
