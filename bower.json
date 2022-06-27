@@ -17,6 +17,8 @@
   "dependencies": {
     "angular": "angularjs#1.8.x",
     "angular-route": "1.8.x",
-    "moment": "^2.29.3"
+    "moment": "^2.29.3",
+    "jquery": "^3.6.0",
+    "sweetalert": "^2.1.2"
   }
 }

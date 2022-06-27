@@ -1,5 +1,18 @@
 const getDB = require("./util").getDB;
 
+function create(collection, doc) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let db = getDB();
+            let result = await db.collection(collection).insertOne(doc);
+            resolve(result);
+        }
+        catch (err) {
+            reject(err);
+        }
+    });
+}
+
 function getByQuery(collection, query, projection) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -27,6 +40,7 @@ function aggregate(collection, pipeline) {
 }
 
 module.exports = {
+    create: create,
     getByQuery: getByQuery,
     aggregate: aggregate
 }

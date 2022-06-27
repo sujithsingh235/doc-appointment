@@ -1,22 +1,74 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <div class="card p-3 w-100 mb-3" ng-repeat="shift in workShifts">
+            <div class="card p-3 w-100 mb-3" ng-repeat="shift in workShifts track by $index">
                 <div class="d-flex">
                     <div class="flex-grow-1">
                         <h5 class="card-title">{{ shift.shiftName }}</h5>
                         <div class="card-subtitle">{{ shift.startTime }} to {{ shift.endTime }}</div>
                     </div>
-                    <button class="btn btn-outline-primary me-2">Add slot</button>
+                    <button type="button" class="btn btn-outline-primary me-2" ng-click="setEnvToAddSlot(shift._id)">Add
+                        slot</button>
                 </div>
                 <hr>
                 <div class="card-body">
                     <button ng-repeat="timeSlot in shiftTimeSlotsMap[shift._id]"
                         class="btn btn-outline-primary me-2 mb-2">
-                        {{ timeSlot.startTime }} - {{ timeSlot.endTime }}
+                        {{ timeSlot.displayStartTime }} - {{ timeSlot.displayEndTime }}
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="addTimeSlot">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Add Time Slot</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form name="addSlotForm">
+
+                    <div class="alert alert-danger alert-dismissible" ng-show="validationError">
+                        {{ validationErrorMsg }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startTime">Start time:</label>
+                        <input id="startTime" name="startTime" type="time" ng-model="newTimeSlot.startTime"
+                            class="form-control" ng-class="{'is-invalid': addSlotForm.startTime.$touched && addSlotForm.startTime.$invalid}" required>
+                        <div class="invalid-feedback">
+                            <div ng-show="addSlotForm.startTime.$error.required"> Please enter start time </div>
+                            <div ng-show="addSlotForm.startTime.$error.range"> Start
+                                time must be inside the range of shift timing. </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="endTime">End time:</label>
+                        <input id="endTime" name="endTime" type="time" ng-model="newTimeSlot.endTime"
+                            class="form-control" ng-class="{'is-invalid': addSlotForm.endTime.$touched && addSlotForm.endTime.$invalid}" required>
+                        <div class="invalid-feedback">
+                            <div ng-show="addSlotForm.endTime.$error.required"> Please enter end time </div>
+                            <div ng-show="addSlotForm.endTime.$error.min || addSlotForm.endTime.$error.max"> End
+                                time must be inside the range of shift timing. </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="addTimeSlot()">Add</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+
         </div>
     </div>
 </div>

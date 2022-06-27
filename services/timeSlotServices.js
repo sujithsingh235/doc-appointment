@@ -2,6 +2,24 @@ const collection = "timeSlots";
 const dao = require("../db/baseDao");
 
 const moment = require("moment");
+const ObjectId = require("mongodb").ObjectId;
+
+function createTimeSlot(timeSlot) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            timeSlot.startTime = new Date(timeSlot.startTime);
+            timeSlot.endTime = new Date(timeSlot.endTime);
+            timeSlot.shiftId = new ObjectId(timeSlot.shiftId);
+            timeSlot.appointment = null;
+
+            await dao.create(collection, timeSlot);
+            resolve(true);
+        }
+        catch (err) {
+            reject(err);
+        }
+    });
+}
 
 function getTimeSlotsByDate(date) {
     return new Promise(async (resolve, reject) => {
@@ -45,5 +63,6 @@ function getTimeSlotsByDate(date) {
 }
 
 module.exports = {
-    "getTimeSlotsByDate": getTimeSlotsByDate
+    "getTimeSlotsByDate": getTimeSlotsByDate,
+    "createTimeSlot": createTimeSlot
 }

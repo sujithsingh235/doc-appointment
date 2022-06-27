@@ -13,4 +13,16 @@ router.get("/", async function (req, res) {
     }
 });
 
+router.post("/", async function (req, res) {
+    try {
+        await timeSlotServices.createTimeSlot(req.body);
+        res.send(true);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong.");
+    }
+});
+
+
 module.exports = router;
