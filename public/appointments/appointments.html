@@ -1,0 +1,32 @@
+<ul class="nav nav-tabs mx-5 mt-3">
+    <li class="nav-item">
+        <a class="nav-link active" href="/#!/appointments">
+            Appointments
+            <span class="badge rounded-pill bg-light text-dark">{{ appointments.length }}</span>
+        </a>
+    </li>
+</ul>
+<div class="card mx-5">
+    <div class="card-body">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>S.no</th>
+                    <th>Patient Name</th>
+                    <th>Contact Number</th>
+                    <th>Slot</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="appointment in appointments track by $index">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ appointment.appointment.patientName }}</td>
+                    <td>{{ appointment.appointment.contactNumber }}</td>
+                    <td>{{ appointment.displayStartTime }} - {{ appointment.displayEndTime }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-var timeSlotsController = function ($scope, $http, $timeout) {
+var timeSlotsCtrl = function ($scope, $http, $timeout) {
 
     $scope.workShifts = [];
     // workShift ==> timeSlots
@@ -25,8 +25,8 @@ var timeSlotsController = function ($scope, $http, $timeout) {
 
                     shiftTimeSlotsMap[record.shiftId] = record.timeSlots;
                     record.timeSlots.forEach(timeSlot => {
-                        timeSlot.displayStartTime = moment(timeSlot.startTime).format("hh:mm A");
-                        timeSlot.displayEndTime = moment(timeSlot.endTime).format("hh:mm A");
+                        timeSlot.displayStartTime = moment(timeSlot.startTime).format("HH:mm");
+                        timeSlot.displayEndTime = moment(timeSlot.endTime).format("HH:mm");
                         timeSlot.startTime = new Date(timeSlot.startTime);
                         timeSlot.endTime = new Date(timeSlot.endTime);
                     });
@@ -168,6 +168,6 @@ var timeSlotsController = function ($scope, $http, $timeout) {
     }
 }
 
-timeSlotsController.$inject = ["$scope", "$http", "$timeout"];
+timeSlotsCtrl.$inject = ["$scope", "$http", "$timeout"];
 var app = angular.module("App");
-app.controller("timeSlotsController", timeSlotsController);
+app.controller("timeSlotsCtrl", timeSlotsCtrl);
