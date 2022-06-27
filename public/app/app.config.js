@@ -8,7 +8,11 @@ angular
             $routeProvider.
                 when('/timeSlots', {
                     templateUrl: "timeSlots/timeSlots.html",
-                    controller: "timeSlotsController"
+                    controller: "timeSlotsCtrl"
+                }).
+                when('/appointments', {
+                    templateUrl: "appointments/appointments.html",
+                    controller: "appointmentsCtrl"
                 }).
                 otherwise('/timeSlots');
         }

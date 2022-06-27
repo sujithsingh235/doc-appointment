@@ -19,4 +19,14 @@ router.post('/', async function (req, res) {
     }
 });
 
+router.get("/", async function (req, res) {
+    try {
+        let result = await timeSlotServices.getAppointments(req.query.date);
+        res.send(result);
+    }
+    catch (err) {
+        res.status(500).send("Something went wrong.");
+    }
+});
+
 module.exports = router;

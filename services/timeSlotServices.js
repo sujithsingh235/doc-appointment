@@ -78,8 +78,32 @@ function createAppointment(timeSlotId, appointment) {
     });
 }
 
+function getAppointments(date) {
+    return new Promise((resolve, reject) => {
+        try {
+            // start and end time of the given date
+            let startTime = moment(date).startOf("day").toDate();
+            let endTime = moment(date).endOf("day").toDate();
+            let query = {
+                "startTime": {
+                    $gte: startTime,
+                    $lt: endTime
+                },
+                "appointment": { $ne: null }
+            };
+
+            let result = dao.getByQuery(collection, query, {});
+            resolve(result);
+        }
+        catch (err) {
+            reject(err);
+        }
+    });
+}
+
 module.exports = {
     "getTimeSlotsByDate": getTimeSlotsByDate,
     "createTimeSlot": createTimeSlot,
-    "createAppointment": createAppointment
+    "createAppointment": createAppointment,
+    "getAppointments": getAppointments
 }
