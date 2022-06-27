@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 const timeSlotsRouter = require("./routes/timeSlots");
 const workShiftsRouter = require("./routes/workShifts");
+const appointmentsRouter = require("./routes/appointments");
 
 const connectDB = require("./db/util").connect;
 
@@ -19,5 +20,6 @@ connectDB();
 
 app.use("/timeSlots", timeSlotsRouter);
 app.use("/workShifts", workShiftsRouter);
+app.use("/appointments", appointmentsRouter);
 
 module.exports = app;

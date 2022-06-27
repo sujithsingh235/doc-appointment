@@ -13,6 +13,19 @@ function create(collection, doc) {
     });
 }
 
+function updateOne(collection, filter, detailsToUpdate) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let db = getDB();
+            let result = await db.collection(collection).updateOne(filter, detailsToUpdate);
+            resolve(result);
+        }
+        catch (err) {
+            reject(err);
+        }
+    });
+}
+
 function getByQuery(collection, query, projection) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -42,5 +55,6 @@ function aggregate(collection, pipeline) {
 module.exports = {
     create: create,
     getByQuery: getByQuery,
-    aggregate: aggregate
+    aggregate: aggregate,
+    updateOne: updateOne
 }

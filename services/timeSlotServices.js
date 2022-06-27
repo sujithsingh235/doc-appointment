@@ -62,7 +62,24 @@ function getTimeSlotsByDate(date) {
     });
 }
 
+function createAppointment(timeSlotId, appointment) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let filter = { _id: new ObjectId(timeSlotId) };
+            let detailsToUpdate = {
+                $set: { appointment: appointment }
+            };
+            let result = await dao.updateOne(collection, filter, detailsToUpdate);
+            resolve(result);
+        }
+        catch (err) {
+            reject(err);
+        }
+    });
+}
+
 module.exports = {
     "getTimeSlotsByDate": getTimeSlotsByDate,
-    "createTimeSlot": createTimeSlot
+    "createTimeSlot": createTimeSlot,
+    "createAppointment": createAppointment
 }
